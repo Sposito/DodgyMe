@@ -7,7 +7,10 @@ public class RoadDestroyer : MonoBehaviour {
 	Transform player;
 	public float thrshold = 10f;
 	void Start () {
+		
 		player = GameObject.FindGameObjectWithTag ("Player").transform;
+
+
 		StartCoroutine("CheckAndDestroy");
 //		print (float.MaxValue);
 	}

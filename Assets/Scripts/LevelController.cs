@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using Prime31;
 
 public class LevelController : MonoBehaviour {
 
@@ -8,11 +9,41 @@ public class LevelController : MonoBehaviour {
 	public GameObject playerGO;
 	public AnimationCurve rotation;
 
+	public int laneID = 0;
+	public float sideSpeed = 2f;
+	public int sign = 1;
+
+    public float speedIncreaseRate = 0.06f;
+
 	public int reachOfVisionUnits = 6;
 	int roadCounter = 0;
 	public float playerSpeed = 1f;
 	Vector3 pos = Vector3.zero;
-	void Start () {
+
+	//public TKLSwipeDetector swipe;
+
+	public static int Score {
+		get{ return _score; }
+		set {
+			_score = value;
+			if (_score < 0)
+				_score = 0;
+		}
+	}
+	public static int maxScore = 0;
+
+	public static void SubmitScore(){
+		if (_score <= maxScore)
+			return;
+		maxScore = _score;
+		PlayerPrefs.SetInt ("MaxScore", maxScore);
+		PlayerPrefs.Save ();
+	}
+
+			
+	static int _score;
+
+	void Awake () {
 		
 		for (int i = 0; i < reachOfVisionUnits; i++) {
 			
@@ -23,6 +54,7 @@ public class LevelController : MonoBehaviour {
 
 		playerGO = (GameObject)Instantiate(playerGO,new Vector3(0f, 0.4f, 0f),Quaternion.identity);
 		Camera.main.gameObject.AddComponent<FollowCamera> ();
+		maxScore = PlayerPrefs.GetInt ("MaxScore", 0);
 	}
 	
 	// Update is called once per frame
@@ -38,11 +70,10 @@ public class LevelController : MonoBehaviour {
 		}
 		playerGO.transform.rotation = Quaternion.Euler(0f, rotation.Evaluate (Mathf.Abs(playerGO.transform.position.x) * sign), 0f);
 
+		playerSpeed += speedIncreaseRate * Time.deltaTime;
+
 	}
 
-	public int laneID = 0;
-	public float sideSpeed = 2f;
-	public int sign = 1;
 	void ChangeLane(){
 		if (Input.GetKeyDown (KeyCode.RightArrow)) {
 			laneID += 1;
