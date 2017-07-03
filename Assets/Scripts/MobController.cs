@@ -21,6 +21,7 @@ public class MobController : MonoBehaviour {
 		int p = Random.Range (-1, 2); // -1, 0 or 1
         //Randomly places mob in one of the three lanes
 		transform.position = new Vector3 (p * 2f, transform.position.y, transform.position.z);
+        GetMyComponents();
 	}
 
 	void OnTriggerEnter(Collider col){
@@ -30,7 +31,7 @@ public class MobController : MonoBehaviour {
                          Vector3.forward * zForce); //Z
             
             rb.AddTorque (Vector3.right * pitchTorque + Vector3.forward * rollTorque);
-			
+            PlayHitSound();
             if (!scored) {
 				ChangeScore ();
 				scored = true; //guarantees thar core is only counted once.
@@ -40,5 +41,15 @@ public class MobController : MonoBehaviour {
 
 	protected virtual void ChangeScore(){
 		//Change Score is defined in child classes
+	}
+
+	protected virtual void GetMyComponents()
+	{
+		//GetComponents is defined in child classes
+	}
+
+	protected virtual void PlayHitSound()
+	{
+		//PlayHitSound is defined in child classes
 	}
 }

@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using Prime31;
+using Prime31;
+using System;
 
 public class LevelController : MonoBehaviour {
 
@@ -19,8 +20,6 @@ public class LevelController : MonoBehaviour {
 	int roadCounter = 0;
 	public float playerSpeed = 1f;
 	Vector3 pos = Vector3.zero;
-
-	//public TKLSwipeDetector swipe;
 
 	public static int Score {
 		get{ return _score; }
@@ -52,13 +51,34 @@ public class LevelController : MonoBehaviour {
 			pos += Vector3.forward * 20;
 		}
 
-		playerGO = (GameObject)Instantiate(playerGO,new Vector3(0f, 0.4f, 0f),Quaternion.identity);
+		playerGO = Instantiate(playerGO,new Vector3(0f, 0.4f, 0f),Quaternion.identity);
 		Camera.main.gameObject.AddComponent<FollowCamera> ();
 		maxScore = PlayerPrefs.GetInt ("MaxScore", 0);
+
+
+    
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    void Start(){
+        InputHandler.singleton.levelController = this;
+    }
+  
+    public void HandleSwipe(SwipeDirection dir){
+        
+		if (dir == SwipeDirection.Right){
+			laneID += 1;
+			sign = 1;
+		}
+		else if (dir == SwipeDirection.Left){
+			laneID -= 1;
+			sign = -1;
+		}
+		laneID = Mathf.Clamp(laneID, -1, 1);
+
+    }
+  
+    // Update is called once per frame
+    void Update () {
 		playerGO.transform.Translate (Vector3.forward * playerSpeed * Time.deltaTime,Space.World);
 		ChangeLane ();
 
@@ -75,10 +95,10 @@ public class LevelController : MonoBehaviour {
 	}
 
 	void ChangeLane(){
-		if (Input.GetKeyDown (KeyCode.RightArrow)) {
+        if (MoveRight()) {
 			laneID += 1;
 			sign = 1;
-		} else if (Input.GetKeyDown (KeyCode.LeftArrow)) {
+        } else if (MoveLeft()) {
 			laneID -= 1;
 			sign = -1;
 		}
@@ -89,4 +109,17 @@ public class LevelController : MonoBehaviour {
 			playerGO.transform.Translate (((float)laneID * 2 - playerGO.transform.position.x) * Vector3.right * sideSpeed * Time.deltaTime,Space.World);
 		}
 	}
+
+   
+
+    bool MoveRight(){
+        
+        return Input.GetKeyDown(KeyCode.RightArrow);
+    }
+
+    bool MoveLeft(){
+        return Input.GetKeyDown(KeyCode.LeftArrow);
+    }
+
+
 }
