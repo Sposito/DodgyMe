@@ -7,4 +7,15 @@ public class ZombieController : MobController {
 		LevelController.Score++;
 	}
 
+	AudioSource source;
+	protected override void GetMyComponents()
+	{
+		source = GetComponent<AudioSource>();
+	}
+	
+	protected override void PlayHitSound()
+	{
+		source.Play();
+	}
+
 }
