@@ -13,22 +13,20 @@ public class BarricadeBehaviour : MonoBehaviour {
 		transform.position = new Vector3 (p * 2f, transform.position.y, transform.position.z);
 	}
 
-	void OnCollisionEnter(Collision col){
+    void OnTriggerEnter(Collider col){
         if (firstHit)
             StartCoroutine(WaitClip());
 	}
 
     IEnumerator WaitClip(){
         firstHit = false;
+        LevelController.isPaused = true;
+        GetComponentInChildren<ParticleSystem>().Play();
         AudioSource source = GetComponent<AudioSource>();
         source.Play();
-        yield return new WaitForSeconds(source.clip.length);
+        LevelController.singleton.ToggleGameOverMenu();
+        yield return new WaitForSeconds(source.clip.length + 1f);
 		LevelController.SubmitScore();
-		//Reset Score
-		LevelController.Score = 0;
-        //Reload Scene
-        //Time.timeScale = 0f;
-		SceneManager.LoadScene(0);
     }
 
 }

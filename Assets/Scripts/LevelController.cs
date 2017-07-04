@@ -10,10 +10,20 @@ public class LevelController : MonoBehaviour {
 	public GameObject playerGO;
 	public AnimationCurve rotation;
 
+    public GameObject pauseUI;
+    public static LevelController singleton;
+
 
 	public int laneID = 0;
-	public float sideSpeed = 2f;
-	public int sign = 1;
+    public float sideSpeed = 4f;
+
+    public float minSideSpeed = 6f;
+    public float maxSideSpeed = 20f;
+    public int maxPointCalibrator = 120;
+	
+    public int sign = 1;
+
+    public Transform menuTransform;
 
     public float speedIncreaseRate = 0.06f;
 
@@ -41,9 +51,11 @@ public class LevelController : MonoBehaviour {
 		PlayerPrefs.SetInt ("MaxScore", maxScore);
 		PlayerPrefs.Save ();
 	}
-
-			
+    		
 	static int _score;
+
+    public static bool isPaused = false;
+    public static bool isDisplayingMenu = false;
 
 	void Awake () {
 		
@@ -58,13 +70,12 @@ public class LevelController : MonoBehaviour {
 		Camera.main.gameObject.AddComponent<FollowCamera> ();
 		maxScore = PlayerPrefs.GetInt ("MaxScore", 0);
         swipeSound = playerGO.GetComponent<AudioSource>();
-
-
-    
 	}
 
     void Start(){
         InputHandler.singleton.levelController = this;
+        isPaused = false;
+        singleton = this;
     }
   
     public void HandleSwipe(SwipeDirection dir){
@@ -80,27 +91,66 @@ public class LevelController : MonoBehaviour {
             swipeSound.Play();
 		}
 		laneID = Mathf.Clamp(laneID, -1, 1);
-
     }
   
-    // Update is called once per frame
     void Update () {
-		playerGO.transform.Translate (Vector3.forward * playerSpeed * Time.deltaTime,Space.World);
-		ChangeLane ();
 
-		if (playerGO.transform.position.z > roadCounter * 20f) {
-			
-			Instantiate (roadGO, pos +Vector3.forward * 20 * roadCounter , Quaternion.identity);
-			roadCounter++;
-			 
-		}
-		playerGO.transform.rotation = Quaternion.Euler(0f, rotation.Evaluate (Mathf.Abs(playerGO.transform.position.x) * sign), 0f);
+        if (!isPaused) {
+            playerGO.transform.Translate(Vector3.forward * playerSpeed * Time.deltaTime, Space.World);
+            ChangeLane();
 
-		playerSpeed += speedIncreaseRate * Time.deltaTime;
+            if (playerGO.transform.position.z > roadCounter * 20f) {
 
+                Instantiate(roadGO, pos + Vector3.forward * 20 * roadCounter, Quaternion.identity);
+                roadCounter++;
+
+            }
+            playerGO.transform.rotation = Quaternion.Euler(0f, rotation.Evaluate(Mathf.Abs(playerGO.transform.position.x) * sign), 0f);
+
+            playerSpeed += speedIncreaseRate * Time.deltaTime;
+            UpdateSideSpeed();
+        }
 	}
 
-	void ChangeLane(){
+    public void ToggleGameOverMenu(){
+        StartCoroutine(BringGameOverMenu());
+        isDisplayingMenu = true;
+        pauseUI.SetActive(false);
+    }
+
+    IEnumerator BringGameOverMenu(){
+        while(menuTransform.rotation != Quaternion.identity){
+            menuTransform.localRotation = Quaternion.Lerp(menuTransform.localRotation, Quaternion.identity, 0.1f);
+            print("rotating");
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+	public void ContinueGame() {
+		StopAllCoroutines();
+        pauseUI.SetActive(true);
+		menuTransform.localRotation = Quaternion.Euler(-60f, 0f, 0f);
+		isDisplayingMenu = false;
+		playerGO.transform.Translate(Vector3.forward * 2);
+		isPaused = false;
+	}
+
+	void UpdateSideSpeed() {
+		var inter = (float)Score / (float)maxPointCalibrator;
+		sideSpeed = Mathf.Lerp(minSideSpeed, maxSideSpeed, inter);
+		print(inter);
+	}
+
+    public void PauseGame(){
+        isPaused = true;
+    }
+
+    public void UnPauseGame(){
+        if(!isDisplayingMenu)
+            isPaused = false;
+    }
+	
+    void ChangeLane(){
         if (MoveRight()) {
 			laneID += 1;
 			sign = 1;
@@ -120,16 +170,11 @@ public class LevelController : MonoBehaviour {
 		}
 	}
 
-   
-
     bool MoveRight(){
-        
         return Input.GetKeyDown(KeyCode.RightArrow);
     }
 
     bool MoveLeft(){
         return Input.GetKeyDown(KeyCode.LeftArrow);
     }
-
-
 }
