@@ -10,6 +10,7 @@ public class LevelController : MonoBehaviour {
 	public GameObject playerGO;
 	public AnimationCurve rotation;
 
+
 	public int laneID = 0;
 	public float sideSpeed = 2f;
 	public int sign = 1;
@@ -20,6 +21,8 @@ public class LevelController : MonoBehaviour {
 	int roadCounter = 0;
 	public float playerSpeed = 1f;
 	Vector3 pos = Vector3.zero;
+
+    AudioSource swipeSound;
 
 	public static int Score {
 		get{ return _score; }
@@ -54,6 +57,7 @@ public class LevelController : MonoBehaviour {
 		playerGO = Instantiate(playerGO,new Vector3(0f, 0.4f, 0f),Quaternion.identity);
 		Camera.main.gameObject.AddComponent<FollowCamera> ();
 		maxScore = PlayerPrefs.GetInt ("MaxScore", 0);
+        swipeSound = playerGO.GetComponent<AudioSource>();
 
 
     
@@ -68,10 +72,12 @@ public class LevelController : MonoBehaviour {
 		if (dir == SwipeDirection.Right){
 			laneID += 1;
 			sign = 1;
+            swipeSound.Play();
 		}
 		else if (dir == SwipeDirection.Left){
 			laneID -= 1;
 			sign = -1;
+            swipeSound.Play();
 		}
 		laneID = Mathf.Clamp(laneID, -1, 1);
 
@@ -98,9 +104,13 @@ public class LevelController : MonoBehaviour {
         if (MoveRight()) {
 			laneID += 1;
 			sign = 1;
-        } else if (MoveLeft()) {
+            swipeSound.Play();
+        } 
+
+        else if (MoveLeft()) {
 			laneID -= 1;
 			sign = -1;
+            swipeSound.Play();
 		}
 		laneID = Mathf.Clamp (laneID, -1, 1);
 

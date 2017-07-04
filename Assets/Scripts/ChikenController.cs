@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-/// <summary> </summary>
+
 public class ChikenController : MobController {
     AudioSource source;
 	protected override void GetMyComponents(){

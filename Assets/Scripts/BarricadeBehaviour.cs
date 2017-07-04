@@ -5,6 +5,7 @@ using System.Collections;
 /// <summary> Behaviour of barricade game objects that resets the game at collision. </summary>
 public class BarricadeBehaviour : MonoBehaviour {
 
+    //Garantee that there will be no multiple collisions
     bool firstHit = true;
 
 	void Start () {
@@ -25,7 +26,8 @@ public class BarricadeBehaviour : MonoBehaviour {
 		LevelController.SubmitScore();
 		//Reset Score
 		LevelController.Score = 0;
-		//Reload Scene
+        //Reload Scene
+        //Time.timeScale = 0f;
 		SceneManager.LoadScene(0);
     }
 

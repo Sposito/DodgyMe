@@ -43,13 +43,11 @@ public class MobController : MonoBehaviour {
 		//Change Score is defined in child classes
 	}
 
-	protected virtual void GetMyComponents()
-	{
+	protected virtual void GetMyComponents(){
 		//GetComponents is defined in child classes
 	}
 
-	protected virtual void PlayHitSound()
-	{
+	protected virtual void PlayHitSound(){
 		//PlayHitSound is defined in child classes
 	}
 }
