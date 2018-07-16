@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ButtonBehaviour : MonoBehaviour {
@@ -48,8 +46,4 @@ public class ButtonBehaviour : MonoBehaviour {
         rend.material.color = color;
     }
 
-
-    void Update () {
-		
-	}
 }

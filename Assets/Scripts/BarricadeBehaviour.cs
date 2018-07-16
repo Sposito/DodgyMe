@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections;
 
 /// <summary> Behaviour of barricade game objects that resets the game at collision. </summary>

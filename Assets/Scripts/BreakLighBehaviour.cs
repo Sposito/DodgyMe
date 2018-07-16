@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary> Behaviour that changes material color of breaklighs. </summary>
 public class BreakLighBehaviour : MonoBehaviour {
 
 	Renderer rend;
