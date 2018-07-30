@@ -4,11 +4,15 @@ using UnityEngine;
 using Prime31;
 using System;
 
+
 public class LevelController : MonoBehaviour {
 
-	public GameObject roadGO;
+	public static bool isRetrying = false;
+    
+    public GameObject roadGO;
 	public GameObject playerGO;
 	public AnimationCurve rotation;
+
 
     public GameObject pauseUI;
     public static LevelController singleton;
@@ -23,7 +27,8 @@ public class LevelController : MonoBehaviour {
 	
     public int sign = 1;
 
-    public Transform menuTransform;
+    public Transform gameOverMenuTransform;
+    public Transform startMenuTranform;
 
     public float speedIncreaseRate = 0.06f;
 
@@ -74,7 +79,13 @@ public class LevelController : MonoBehaviour {
 
     void Start(){
         InputHandler.singleton.levelController = this;
-        isPaused = false;
+        PauseGame();
+        if(isRetrying){
+            StartGame();
+        }
+        else{
+            pauseUI.SetActive(false);
+        }
         singleton = this;
     }
   
@@ -119,21 +130,30 @@ public class LevelController : MonoBehaviour {
     }
 
     IEnumerator BringGameOverMenu(){
-        while(menuTransform.rotation != Quaternion.identity){
-            menuTransform.localRotation = Quaternion.Lerp(menuTransform.localRotation, Quaternion.identity, 0.1f);
+        while(gameOverMenuTransform.rotation != Quaternion.identity){
+            gameOverMenuTransform.localRotation = Quaternion.Lerp(gameOverMenuTransform.localRotation, Quaternion.identity, 0.1f);
             print("rotating");
             yield return new WaitForEndOfFrame();
         }
     }
 
+    
+
 	public void ContinueGame() {
 		StopAllCoroutines();
         pauseUI.SetActive(true);
-		menuTransform.localRotation = Quaternion.Euler(-60f, 0f, 0f);
+		gameOverMenuTransform.localRotation = Quaternion.Euler(-60f, 0f, 0f);
 		isDisplayingMenu = false;
 		playerGO.transform.Translate(Vector3.forward * 2);
 		isPaused = false;
 	}
+
+    public void StartGame(){
+        StopAllCoroutines();
+        startMenuTranform.localRotation = Quaternion.Euler(-60f, 0f, 0f);
+        UnPauseGame();
+        pauseUI.SetActive(true);
+    }
 
 	void UpdateSideSpeed() {
 		var inter = (float)Score / (float)maxPointCalibrator;
@@ -171,10 +191,12 @@ public class LevelController : MonoBehaviour {
 	}
 
     bool MoveRight(){
-        return Input.GetKeyDown(KeyCode.RightArrow);
+        return Input.GetKeyDown(KeyCode.RightArrow) || 
+        Input.GetKeyDown(KeyCode.D);
     }
 
     bool MoveLeft(){
-        return Input.GetKeyDown(KeyCode.LeftArrow);
+        return Input.GetKeyDown(KeyCode.LeftArrow) || 
+        Input.GetKeyDown(KeyCode.A);
     }
 }

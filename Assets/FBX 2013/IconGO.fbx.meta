@@ -1,0 +1,232 @@
+fileFormatVersion: 2
+guid: 18e5f3a04fc72470cbdcb0457ed9d52b
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Beak
+    100002: Body
+    100004: Boot
+    100006: BootTip
+    100008: Chiken
+    100010: Cube (10)
+    100012: FootTip
+    100014: GameObject
+    100016: Head
+    100018: Head 1
+    100020: Hips
+    100022: //RootNode
+    100024: L Eye
+    100026: LeftArm
+    100028: LeftEye
+    100030: LeftLeg
+    100032: LeftWing
+    100034: LFoot
+    100036: LLeg
+    100038: R Eye
+    100040: RFoot
+    100042: RightArm
+    100044: RightEye
+    100046: RightLeg
+    100048: RighWing
+    100050: RLeg
+    100052: Tail
+    100054: Torso
+    100056: Ubeak
+    100058: Zombie
+    400000: Beak
+    400002: Body
+    400004: Boot
+    400006: BootTip
+    400008: Chiken
+    400010: Cube (10)
+    400012: FootTip
+    400014: GameObject
+    400016: Head
+    400018: Head 1
+    400020: Hips
+    400022: //RootNode
+    400024: L Eye
+    400026: LeftArm
+    400028: LeftEye
+    400030: LeftLeg
+    400032: LeftWing
+    400034: LFoot
+    400036: LLeg
+    400038: R Eye
+    400040: RFoot
+    400042: RightArm
+    400044: RightEye
+    400046: RightLeg
+    400048: RighWing
+    400050: RLeg
+    400052: Tail
+    400054: Torso
+    400056: Ubeak
+    400058: Zombie
+    2100000: white
+    2100002: Yellow
+    2100004: red
+    2100006: Tire
+    2100008: Default-Material
+    2100010: Grass
+    2300000: Beak
+    2300002: Body
+    2300004: Boot
+    2300006: BootTip
+    2300008: Cube (10)
+    2300010: FootTip
+    2300012: Head
+    2300014: Head 1
+    2300016: Hips
+    2300018: L Eye
+    2300020: LeftArm
+    2300022: LeftEye
+    2300024: LeftLeg
+    2300026: LeftWing
+    2300028: LFoot
+    2300030: LLeg
+    2300032: R Eye
+    2300034: RFoot
+    2300036: RightArm
+    2300038: RightEye
+    2300040: RightLeg
+    2300042: RighWing
+    2300044: RLeg
+    2300046: Tail
+    2300048: Torso
+    2300050: Ubeak
+    3300000: Beak
+    3300002: Body
+    3300004: Boot
+    3300006: BootTip
+    3300008: Cube (10)
+    3300010: FootTip
+    3300012: Head
+    3300014: Head 1
+    3300016: Hips
+    3300018: L Eye
+    3300020: LeftArm
+    3300022: LeftEye
+    3300024: LeftLeg
+    3300026: LeftWing
+    3300028: LFoot
+    3300030: LLeg
+    3300032: R Eye
+    3300034: RFoot
+    3300036: RightArm
+    3300038: RightEye
+    3300040: RightLeg
+    3300042: RighWing
+    3300044: RLeg
+    3300046: Tail
+    3300048: Torso
+    3300050: Ubeak
+    4300000: Body
+    4300002: Head
+    4300004: Beak
+    4300006: Ubeak
+    4300008: R Eye
+    4300010: L Eye
+    4300012: LeftWing
+    4300014: RighWing
+    4300016: Tail
+    4300018: RLeg
+    4300020: LLeg
+    4300022: RFoot
+    4300024: LFoot
+    4300026: Head
+    4300028: Torso
+    4300030: LeftArm
+    4300032: RightArm
+    4300034: RightLeg
+    4300036: LeftLeg
+    4300038: BootTip
+    4300040: Cube (10)
+    4300042: Hips
+    4300044: Boot
+    4300046: FootTip
+    4300048: RightEye
+    4300050: LeftEye
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

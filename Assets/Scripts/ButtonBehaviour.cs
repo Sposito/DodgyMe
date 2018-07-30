@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 
 public class ButtonBehaviour : MonoBehaviour {
-    public enum ButtonKind {None, Retry, Continue};
+    public enum ButtonKind {None, Retry, Continue, Start};
     public ButtonKind kind = ButtonKind.None;
     Color color;
     MeshRenderer rend;
@@ -28,10 +28,14 @@ public class ButtonBehaviour : MonoBehaviour {
 					//Reset Score
 					LevelController.Score = 0;
                     LevelController.isDisplayingMenu = false;
+                    LevelController.isRetrying = true;
                     SceneManager.LoadScene(0);
                     break;
                 case ButtonKind.Continue:
                     LevelController.singleton.ContinueGame();
+                    break;
+                case ButtonKind.Start:
+                    LevelController.singleton.StartGame();
                     break;
                 default:
                     break;
