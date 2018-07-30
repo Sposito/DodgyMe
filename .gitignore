@@ -1,5 +1,6 @@
 # Created by https://www.gitignore.io
 Assets/PostProcessing/
+Assets/PostProcessing/*
 ### Unity ###
 [Ll]ibrary/
 [Tt]emp/
